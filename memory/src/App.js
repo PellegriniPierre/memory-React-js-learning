@@ -6,5 +6,5 @@ class App extends Component {
     return <div className="memory" />
   }
 }
-
+ 
 export default App
