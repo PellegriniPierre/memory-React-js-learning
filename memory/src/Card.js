@@ -6,7 +6,7 @@ const HIDDEN_SYMBOL = '❓'
 
 const Card = ({card, feedback, onClick}) => (
     <div className={`card ${feedback}`} onClick={() => (card)}>
-        <span classname="symbol">
+        <span className="symbol">
             {feedback === 'hidden' ? HIDDEN_SYMBOL : card}
         </span>
     </div>
