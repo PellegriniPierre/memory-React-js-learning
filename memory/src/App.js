@@ -37,7 +37,7 @@ render() {
   const { cards, guesses, matchedCardIndices } = this.state
   const won = matchedCardIndices.length === cards.length
   return (
-    <div className="memory">
+    <div className="Memory">
       <GuessCount guesses={guesses} />
       {cards.map((card, index) => (
       <Card
