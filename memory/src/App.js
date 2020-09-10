@@ -9,7 +9,7 @@ const SIDE = 6
 const SYMBOLS = '😀🎉💖🎩🐶🐱🦄🐬🌍🌛🌞💫🍎🍌🍓🍐🍟🍿'
 
 class App extends Component {
-  state= {
+  state = {
     cards: this.generateCards(),
     currentPair: [],
     guesses: 0,
@@ -28,30 +28,58 @@ class App extends Component {
   }
 
   // Arrow fx for binding
-  handleCardClick = (card) => {
-    console.log(card, this)
+  handleCardClick = index => {
+    const {currentPair} = this.state
+
+    if (currentPair.length === 2) {
+      return
+    }
+  
+    if (currentPair.length === 0) {
+      this.setState({ currentPair: [index] })
+      return
+    }
+  
+    this.handleNewPairClosedBy(index)
+  }
+
+  getFeedbackForCard(index) {
+    const { currentPair, matchedCardIndices } = this.state
+    const indexMatched = matchedCardIndices.includes(index)
+  
+    if (currentPair.length < 2) {
+      return indexMatched || index === currentPair[0] ? 'visible' : 'hidden'
+    }
+  
+    if (currentPair.includes(index)) {
+      return indexMatched ? 'justMatched' : 'justMismatched'
+    }
+  
+    return indexMatched ? 'visible' : 'hidden'
   }
 
 
-render() {
-  const { cards, guesses, matchedCardIndices } = this.state
-  const won = matchedCardIndices.length === cards.length
-  return (
-    <div className="Memory">
-      <GuessCount guesses={guesses} />
-      {cards.map((card, index) => (
-      <Card
-        card={card}
-        feedback="visible"
-        key={index}
-        onClick={this.handleCardClick}
-      />
-    ))}
-    {won && <HallOfFame entries={FAKE_HOF} />}
-  </div>
+  render() {
+    const { cards, guesses, matchedCardIndices } = this.state
+    const won = matchedCardIndices.length === cards.length
+    return (
+      <div className="memory">
+        <GuessCount guesses={guesses} />
+        {cards.map((card, index) => (
+        <Card
+          card={card}
+          feedback={this.getFeedbackForCard(index)}
+          index={index}
+          key={index}
+          onClick={this.handleCardClick}
+        />
+        ))}
+        {won && <HallOfFame entries={FAKE_HOF} />}
+      </div>
+    )
+  }
 
-)
-}
+
 }
 
 export default App
