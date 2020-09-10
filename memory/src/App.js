@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import shuffle from 'lodash.shuffle'
 
-import './App.css'
-
 import Card from './Card'
 import GuessCount from './GuessCount'
 import HallOfFame, { FAKE_HOF } from './HallOfFame'
@@ -11,7 +9,12 @@ const SIDE = 6
 const SYMBOLS = '😀🎉💖🎩🐶🐱🦄🐬🌍🌛🌞💫🍎🍌🍓🍐🍟🍿'
 
 class App extends Component {
-  cards = this.generateCards()
+  state= {
+    cards: this.generateCards(),
+    currentPair: [],
+    guesses: 0,
+    matchedCardIndices: [],
+  }
 
   generateCards() {
     const result = []
@@ -24,27 +27,31 @@ class App extends Component {
     return shuffle(result)
   }
 
-  handleCardClick(card) {
-    console.log(card, 'clicked')
+  // Arrow fx for binding
+  handleCardClick = (card) => {
+    console.log(card, this)
   }
 
-  render() {
-    const won = new Date().getSeconds() % 2 === 0
-    return (
-      <div className="memory">
-        <GuessCount guesses={0} />
-        {this.cards.map((card, index) => (
-          <Card
-            card={card}
-            feedback="visible"
-            key={index}
-            onClick={this.handleCardClick}
-          />
-        ))}
-        {won && <HallOfFame entries={FAKE_HOF} />}
-      </div>
-    )
-  }
+
+render() {
+  const { cards, guesses, matchedCardIndices } = this.state
+  const won = matchedCardIndices.length === cards.length
+  return (
+    <div className="memory">
+      <GuessCount guesses={guesses} />
+      {cards.map((card, index) => (
+      <Card
+        card={card}
+        feedback="visible"
+        key={index}
+        onClick={this.handleCardClick}
+      />
+    ))}
+    {won && <HallOfFame entries={FAKE_HOF} />}
+  </div>
+
+)
+}
 }
 
 export default App
