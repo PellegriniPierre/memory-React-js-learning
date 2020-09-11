@@ -4,6 +4,7 @@ import shuffle from 'lodash.shuffle'
 import Card from './Card'
 import GuessCount from './GuessCount'
 import HallOfFame, { FAKE_HOF } from './HallOfFame'
+import HighScoreInput from './HighScoreInput'
 
 const SIDE = 6
 const SYMBOLS = '😀🎉💖🎩🐶🐱🦄🐬🌍🌛🌞💫🍎🍌🍓🍐🍟🍿'
@@ -15,7 +16,12 @@ class App extends Component {
     cards: this.generateCards(),
     currentPair: [],
     guesses: 0,
+    hallOfFame: null,
     matchedCardIndices: [],
+  }
+
+  displayHallOfFame = hallOfFame => {
+    this.setState({hallOfFame})
   }
 
   generateCards() {
@@ -89,10 +95,10 @@ class App extends Component {
           onClick={this.handleCardClick}
         />
         ))}
-        {won && (hallOfFame ? (
-          <HallOfFame entries={hallOfFame} />
+        {won && (HallOfFame ? (
+          <HallOfFame entries={FAKE_HOF} />
         ) : (
-          <HighscoreInput 
+          <HighScoreInput
             guesses = {guesses}
             onStored={this.displayHallOfFame}
           />
