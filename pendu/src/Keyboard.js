@@ -3,31 +3,11 @@ import React from 'react'
 
 import './Keyboard.css'
 
-const KEYS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const KEYS = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 
-const Masked = '_'
+const Keyboard = KEYS.map() 
 
-const Card = ({ card, feedback, index, onClick }) => (
-  <div className={`card ${feedback}`} onClick={() => onClick(index)}>
-    <span className="symbol">
-      {feedback === 'hidden' ? HIDDEN_SYMBOL : card}
-    </span>
-  </div>
-)
-
-Card.propTypes = {
-  card: PropTypes.string.isRequired,
-  feedback: PropTypes.oneOf([
-    'hidden',
-    'justMatched',
-    'justMismatched',
-    'visible',
-  ]).isRequired,
-  index: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired,
-}
-
-export default Card
+export default Keyboard
 
 
 

@@ -3,11 +3,14 @@ import React from 'react'
 
 import './Result.css'
 
+import Keyboard from './Keyboard'
+import Mask from './Mask'
 
-const Result = ({ card, feedback, index, onClick }) => (
-  <div className={`card ${feedback}`} onClick={() => onClick(index)}>
+
+const Result = ({ key, feedback, index, onClick }) => (
+  <div className={`key ${feedback}`} onClick={() => onClick(index)}>
     <span className="symbol">
-      {feedback === 'hidden' ? HIDDEN_SYMBOL : card}
+      {feedback === 'hidden' ? MASKED_LETTER : maskedletter}
     </span>
   </div>
 )
@@ -24,4 +27,4 @@ Result.propTypes = {
   onClick: PropTypes.func.isRequired,
 }
 
-export default Card
+export default Result

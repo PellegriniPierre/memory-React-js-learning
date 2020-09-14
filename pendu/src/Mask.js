@@ -3,15 +3,35 @@ import React from 'react'
 
 import './Mask.css'
 
-const HIDDEN_SYMBOL = '_'
+const MASKED_LETTER = '_'
 
-const Mask = ({ mask, feedback, index, onClick }) => (
+const Mask = ({ maskedLetter, feedback, index, onClick }) => (
     <div className={`mask ${feedback}`} onClick={() => onClick(index)}>
         <span className="letter">
-            {feedback === 'hidden' ? HIDDEN_SYMBOL : mask}
+            {feedback === 'hidden' ? MASKED_LETTER : maskedLetter}
         </span>
     </div>
 )
+
+class MaskedLetter extends Component{
+  static defaultProps = {
+    initialCollapsed: false,
+  }
+
+  static propTypes = {
+    initialCollapsed: PropTypes.bool.isRequired,
+    items: PropTypes.arrayOf(CoolItemPropType).isRequired
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = { collapsed: props.initialCollapsed}
+  }
+}
+
+class MaskedHangPart extends Component{
+
+}
 
 Mask.propTypes = {
   mask: PropTypes.string.isRequired,
