@@ -1,5 +1,18 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Conceptof the game : 
+
+Components: 
+- Word Mask
+- Keyboard
+- Hang-man Mask
+- Result Table
+
+On each touch of the Keyboard, used letter have to disappear, if the letter is contained in the Word to find, the letter is appearing on the Word Mask. If the letter is not, one part of the hang-man is appearing. 
+
+Goal: To win the game, the player have to discover each letters of the word before all the parts have appeared or the game is lost.
+If the word appears totally, the players wins and a table shows up with the number of words discovered and the number of mistakes.
+
 ## Available Scripts
 
 In the project directory, you can run:
